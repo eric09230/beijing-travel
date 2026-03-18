@@ -168,6 +168,18 @@ h3 {
 .map-link:hover { background: #2074a8; }
 .map-link::before { content: '\1F4CD '; }
 
+.flight-info {
+  background: #eaf2f8;
+  border-left: 4px solid #2980b9;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.92rem;
+  line-height: 1.8;
+}
+.flight-info .flight-number { font-weight: 700; color: #2980b9; }
+.flight-info .flight-time { font-weight: 700; font-size: 1.05rem; }
+
 .nav-btn {
   display: inline-block;
   background: #27ae60;
@@ -278,6 +290,17 @@ tr:nth-child(even) { background: #f8f9fa; }
 <!-- ==================== 總覽 Tab ==================== -->
 <div class="tab active" id="tab-overview">
 
+<div class="day-card">
+<h3>航班資訊</h3>
+<table>
+  <tr><th></th><th>去程 4/15（三）</th><th>回程 4/22（三）</th></tr>
+  <tr><td><strong>航班</strong></td><td>海南航空 HU7988</td><td>海南航空 HU7987</td></tr>
+  <tr><td><strong>機型</strong></td><td>波音 737-800（含餐）</td><td>波音 737-800（含餐）</td></tr>
+  <tr><td><strong>出發</strong></td><td>13:05 TPE 桃園 T2</td><td>07:55 PEK 首都 T2</td></tr>
+  <tr><td><strong>抵達</strong></td><td>16:35 PEK 首都 T2</td><td>11:25 TPE 桃園 T2</td></tr>
+</table>
+</div>
+
 <h2>一、行前準備清單</h2>
 
 <div class="day-card">
@@ -355,6 +378,11 @@ tr:nth-child(even) { background: #f8f9fa; }
       <div class="day-title">抵達北京 + 前門大街散步</div>
       <div class="day-date">4/15（三）</div>
     </div>
+  </div>
+  <div class="flight-info">
+    <span class="flight-number">海南航空 HU7988</span>｜經濟艙｜波音 737-800｜含餐<br>
+    <span class="flight-time">13:05</span> TPE 桃園機場 T2 →
+    <span class="flight-time">16:35</span> PEK 北京首都機場 T2
   </div>
   <a class="map-link" href="https://uri.amap.com/marker?markers=116.601144,40.078538,首都機場T2|116.397755,39.899168,前門大街|116.395324,39.897861,大柵欄&callnative=1" target="_blank">在高德地圖查看今日景點</a>
   <div class="timeline">
@@ -839,6 +867,11 @@ tr:nth-child(even) { background: #f8f9fa; }
       <div class="day-date">4/22（三）</div>
     </div>
   </div>
+  <div class="flight-info">
+    <span class="flight-number">海南航空 HU7987</span>｜經濟艙｜波音 737-800｜含餐<br>
+    <span class="flight-time">07:55</span> PEK 北京首都機場 T2 →
+    <span class="flight-time">11:25</span> TPE 桃園機場 T2
+  </div>
   <a class="map-link" href="https://uri.amap.com/marker?markers=116.601144,40.078538,首都機場T2&callnative=1" target="_blank">在高德地圖查看機場位置</a>
   <div class="timeline">
     <div class="time-block">
@@ -852,7 +885,7 @@ tr:nth-child(even) { background: #f8f9fa; }
       </div>
     </div>
     <div class="time-block">
-      <div class="time-label">07:55 起飛</div>
+      <div class="time-label">07:55 起飛（HU7987）</div>
       <p>北京 (PEK) → 台北 (TPE)，直飛，11:25 抵達桃園機場</p>
     </div>
   </div>
