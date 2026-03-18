@@ -168,6 +168,24 @@ h3 {
 .map-link:hover { background: #2074a8; }
 .map-link::before { content: '\1F4CD '; }
 
+.nav-btn {
+  display: inline-block;
+  background: #27ae60;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  margin: 3px 3px 3px 0;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: background 0.2s;
+  line-height: 1.6;
+}
+.nav-btn:hover { background: #1e8449; }
+.nav-btn::before { content: '\1F9ED '; }
+.nav-btns { margin: 5px 0 2px; }
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -355,12 +373,20 @@ tr:nth-child(even) { background: #f8f9fa; }
     <div class="time-block">
       <div class="time-label">19:30 前門大街 + 大柵欄 散步</div>
       <p>走走逛逛老街，感受北京夜景，買點小吃</p>
+      <div class="nav-btns">
+        <button class="nav-btn" data-lat="39.899168" data-lon="116.397755" data-name="前門大街">前門大街</button>
+        <button class="nav-btn" data-lat="39.897861" data-lon="116.395324" data-name="大柵欄">大柵欄</button>
+      </div>
     </div>
     <div class="time-block">
       <div class="time-label">20:30 晚餐</div>
       <div class="food">
         <strong>推薦：</strong>四季民福（前門店）或都一處（燒賣老字號）<br>
         人均 ~RMB 80-120，三人約 RMB 250-360
+      </div>
+      <div class="nav-btns">
+        <button class="nav-btn" data-keyword="四季民福(前门店)">四季民福</button>
+        <button class="nav-btn" data-keyword="都一处(前门店)">都一處</button>
       </div>
     </div>
     <div class="time-block">
@@ -394,12 +420,18 @@ tr:nth-child(even) { background: #f8f9fa; }
       <div class="time-label">07:30 前往天安門廣場</div>
       <p>步行或搭地鐵 1 號線「天安門東站」→ 先在天安門廣場拍照留念</p>
       <p>安檢 + 步行到午門約需 30-40 分鐘，須提早出發。需攜帶台胞證</p>
+      <div class="nav-btns">
+        <button class="nav-btn" data-lat="39.90923" data-lon="116.397428" data-name="天安門廣場">天安門廣場</button>
+      </div>
     </div>
     <div class="time-block">
       <div class="time-label">08:30 進入故宮（午門入口）</div>
       <p><span class="spot-name">故宮博物院</span>｜門票：旺季 RMB 60/人 × 3 = RMB 180</p>
       <p><strong>建議路線（4-5 小時）：</strong></p>
       <p>午門 → 太和殿 → 中和殿 → 保和殿 → 珍寶館（額外 RMB 10/人）→ 鐘錶館（RMB 10/人）→ 乾清宮 → 交泰殿 → 坤寧宮 → 御花園 → 神武門出</p>
+      <div class="nav-btns">
+        <button class="nav-btn" data-lat="39.917094" data-lon="116.397026" data-name="故宮午門">故宮午門</button>
+      </div>
     </div>
     <div class="time-block">
       <div class="time-label">12:30 午餐</div>
@@ -407,12 +439,18 @@ tr:nth-child(even) { background: #f8f9fa; }
         <strong>故宮內有餐廳</strong>（冰窖餐廳），或出神武門後在景山附近用餐<br>
         人均 ~RMB 50-80
       </div>
+      <div class="nav-btns">
+        <button class="nav-btn" data-keyword="故宫冰窖餐厅">冰窖餐廳</button>
+      </div>
     </div>
     <div class="time-block">
       <div class="time-label">13:30 景山公園</div>
       <p><span class="spot-name">景山公園</span>｜門票：RMB 10/人（4 月牡丹節期間）</p>
       <p>就在故宮神武門正對面，登上萬春亭可俯瞰整個故宮全景，是最佳拍攝點</p>
       <p>山不高，慢走 15 分鐘即可到頂，有觀光車可坐（RMB 10/人）</p>
+      <div class="nav-btns">
+        <button class="nav-btn" data-lat="39.924091" data-lon="116.396784" data-name="景山公園">景山公園</button>
+      </div>
     </div>
     <div class="time-block">
       <div class="time-label">15:00 回酒店休息</div>
@@ -424,6 +462,10 @@ tr:nth-child(even) { background: #f8f9fa; }
         <strong>推薦：四季民福（故宮店）</strong>可邊吃烤鴨邊看故宮角樓<br>
         或<strong>便宜坊（鮮魚口店）</strong>，燜爐烤鴨，600 年歷史<br>
         人均 ~RMB 115-150，三人約 RMB 350-450
+      </div>
+      <div class="nav-btns">
+        <button class="nav-btn" data-keyword="四季民福(故宫店)">四季民福（故宮店）</button>
+        <button class="nav-btn" data-keyword="便宜坊(鲜鱼口店)">便宜坊（鮮魚口店）</button>
       </div>
     </div>
   </div>
@@ -459,6 +501,9 @@ tr:nth-child(even) { background: #f8f9fa; }
       <p><span class="spot-name">慕田峪長城</span>｜門票：RMB 40/人 × 3 = RMB 120</p>
       <p><strong>為什麼選慕田峪而非八達嶺？</strong></p>
       <p>遊客量僅八達嶺的 1/4、台階更平緩、有纜車和滑道、風景更原始壯觀</p>
+      <div class="nav-btns">
+        <button class="nav-btn" data-lat="40.441400" data-lon="116.565808" data-name="慕田峪長城">慕田峪長城</button>
+      </div>
     </div>
     <div class="time-block">
       <div class="time-label">09:00 纜車上城</div>
@@ -487,6 +532,10 @@ tr:nth-child(even) { background: #f8f9fa; }
       <div class="food">
         <strong>推薦：南門涮肉</strong>或<strong>聚寶源（牛街店）</strong>涮羊肉<br>
         人均 ~RMB 100-120，三人約 RMB 300-360
+      </div>
+      <div class="nav-btns">
+        <button class="nav-btn" data-keyword="南门涮肉">南門涮肉</button>
+        <button class="nav-btn" data-keyword="聚宝源(牛街总店)">聚寶源</button>
       </div>
     </div>
   </div>
@@ -518,6 +567,9 @@ tr:nth-child(even) { background: #f8f9fa; }
       <p><strong>建議路線（3-4 小時）：</strong></p>
       <p>北宮門進 → 蘇州街 → 佛香閣（登高俯瞰昆明湖）→ 長廊（728 米彩繪長廊）→ 石舫 → 乘船遊昆明湖到十七孔橋 → 東宮門出</p>
       <p>（四大部洲可視體力決定是否略過，優先保留搭船和十七孔橋）</p>
+      <div class="nav-btns">
+        <button class="nav-btn" data-lat="39.993456" data-lon="116.272847" data-name="頤和園北宮門">頤和園（北宮門）</button>
+      </div>
     </div>
     <div class="time-block">
       <div class="time-label">12:30 午餐</div>
@@ -531,6 +583,9 @@ tr:nth-child(even) { background: #f8f9fa; }
       <p><span class="spot-name">圓明園遺址公園</span>｜門票：RMB 10/人，西洋樓遺址 +RMB 15/人 × 3 = RMB 75</p>
       <p>重點看西洋樓遺址（大水法），了解歷史。園區很大，不用全走完</p>
       <p>遊覽時間：約 1.5-2 小時</p>
+      <div class="nav-btns">
+        <button class="nav-btn" data-lat="40.008612" data-lon="116.298256" data-name="圓明園">圓明園</button>
+      </div>
     </div>
     <div class="time-block">
       <div class="time-label">16:00 返回市區（提早出發避免趕路）</div>
@@ -542,6 +597,10 @@ tr:nth-child(even) { background: #f8f9fa; }
         <strong>推薦：大董烤鴨（東四十條店）</strong>體驗創新烤鴨<br>
         或<strong>小大董</strong>（平價版），人均 ~RMB 140-196<br>
         三人約 RMB 420-590
+      </div>
+      <div class="nav-btns">
+        <button class="nav-btn" data-keyword="大董烤鸭(东四十条店)">大董烤鴨</button>
+        <button class="nav-btn" data-keyword="小大董 北京">小大董</button>
       </div>
     </div>
   </div>
@@ -572,6 +631,9 @@ tr:nth-child(even) { background: #f8f9fa; }
       <p><span class="spot-name">天壇公園</span>｜聯票：旺季 RMB 34/人 × 3 = RMB 102（含祈年殿、回音壁、圜丘）</p>
       <p><strong>路線：</strong>東門進 → 祈年殿 → 皇穹宇 → 回音壁 → 圜丘 → 南門出</p>
       <p>遊覽約 2-2.5 小時，早上可以看到很多大爺大媽在公園運動，很有生活氣息</p>
+      <div class="nav-btns">
+        <button class="nav-btn" data-lat="39.882085" data-lon="116.418756" data-name="天壇東門">天壇（東門）</button>
+      </div>
     </div>
     <div class="time-block">
       <div class="time-label">11:30 午餐</div>
@@ -580,6 +642,10 @@ tr:nth-child(even) { background: #f8f9fa; }
         聚寶源涮肉（建議提前微信線上取號，現場排隊常超 1 小時）<br>
         免排隊備選：洪記包子、白記年糕、伊寶荷葉甑糕<br>
         人均 ~RMB 50-80
+      </div>
+      <div class="nav-btns">
+        <button class="nav-btn" data-lat="39.892944" data-lon="116.366700" data-name="牛街">牛街美食</button>
+        <button class="nav-btn" data-keyword="聚宝源(牛街总店)">聚寶源</button>
       </div>
     </div>
     <div class="time-block">
@@ -591,6 +657,10 @@ tr:nth-child(even) { background: #f8f9fa; }
       <p><span class="spot-name">什剎海</span>（免費）→ <span class="spot-name">恭王府</span>（門票 RMB 40/人 × 3 = RMB 120）</p>
       <p>可搭人力三輪車逛胡同（~RMB 150/車，可坐 2-3 人），車夫會講解胡同故事</p>
       <p>路線：前海西街 → 銀錠橋 → 菸袋斜街 → 恭王府</p>
+      <div class="nav-btns">
+        <button class="nav-btn" data-lat="39.940647" data-lon="116.384544" data-name="什剎海">什剎海</button>
+        <button class="nav-btn" data-lat="39.937774" data-lon="116.382463" data-name="恭王府">恭王府</button>
+      </div>
     </div>
     <div class="time-block">
       <div class="time-label">17:30 後海 / 菸袋斜街 散步</div>
@@ -602,6 +672,10 @@ tr:nth-child(even) { background: #f8f9fa; }
         <strong>推薦：烤肉季（什剎海店）</strong>，老字號，看著後海吃烤肉<br>
         或<strong>護國寺小吃</strong>嘗傳統北京點心（麵茶、豌豆黃、驢打滾）<br>
         人均 ~RMB 60-120
+      </div>
+      <div class="nav-btns">
+        <button class="nav-btn" data-keyword="烤肉季(什刹海店)">烤肉季</button>
+        <button class="nav-btn" data-keyword="护国寺小吃(护国寺总店)">護國寺小吃</button>
       </div>
     </div>
   </div>
@@ -625,6 +699,9 @@ tr:nth-child(even) { background: #f8f9fa; }
       <p><span class="spot-name">雍和宮</span>｜門票：RMB 25/人 × 3 = RMB 75</p>
       <p>北京最大的藏傳佛教寺院，香火旺盛，18 米高的檀木彌勒佛像很壯觀</p>
       <p>遊覽約 1.5 小時</p>
+      <div class="nav-btns">
+        <button class="nav-btn" data-lat="39.947893" data-lon="116.417197" data-name="雍和宮">雍和宮</button>
+      </div>
     </div>
     <div class="time-block">
       <div class="time-label">10:00 鼓樓</div>
@@ -632,6 +709,9 @@ tr:nth-child(even) { background: #f8f9fa; }
       <p>北京中軸線上的地標建築，登上鼓樓可俯瞰整片胡同區，還有擊鼓表演</p>
       <p>距雍和宮約 15 分鐘車程，與南鑼鼓巷步行僅 5 分鐘，動線順暢</p>
       <p>遊覽約 1 小時</p>
+      <div class="nav-btns">
+        <button class="nav-btn" data-lat="39.940982" data-lon="116.396489" data-name="鼓樓">鼓樓</button>
+      </div>
     </div>
     <div class="time-block">
       <div class="time-label">11:30 午餐（提早避開排隊高峰）</div>
@@ -639,16 +719,25 @@ tr:nth-child(even) { background: #f8f9fa; }
         <strong>推薦：方磚廠 69 號炸醬麵</strong>（雍和宮附近），體驗老北京炸醬麵<br>
         人均 ~RMB 30-40
       </div>
+      <div class="nav-btns">
+        <button class="nav-btn" data-keyword="方砖厂69号炸酱面">方磚廠69號炸醬麵</button>
+      </div>
     </div>
     <div class="time-block">
       <div class="time-label">13:00 南鑼鼓巷</div>
       <p><span class="spot-name">南鑼鼓巷</span>（免費），文藝小巷，很多特色小店和小吃</p>
       <p>推薦：文宇乳酪（雙皮奶）、各種文創小店</p>
       <p>也可走進旁邊的小胡同，比主街安靜有趣</p>
+      <div class="nav-btns">
+        <button class="nav-btn" data-lat="39.937385" data-lon="116.403038" data-name="南鑼鼓巷">南鑼鼓巷</button>
+      </div>
     </div>
     <div class="time-block">
       <div class="time-label">15:00 五道營胡同（可選）</div>
       <p>比南鑼鼓巷安靜的文藝胡同，有咖啡館可以坐下休息</p>
+      <div class="nav-btns">
+        <button class="nav-btn" data-lat="39.946927" data-lon="116.404879" data-name="五道營胡同">五道營胡同</button>
+      </div>
     </div>
     <div class="time-block">
       <div class="time-label">16:30 回酒店休息</div>
@@ -659,6 +748,10 @@ tr:nth-child(even) { background: #f8f9fa; }
         <strong>推薦：東來順（王府井店）</strong>百年老字號涮羊肉<br>
         或<strong>全聚德（前門店）</strong>體驗老字號烤鴨<br>
         人均 ~RMB 120-160，三人約 RMB 360-480
+      </div>
+      <div class="nav-btns">
+        <button class="nav-btn" data-keyword="东来顺(王府井店)">東來順</button>
+        <button class="nav-btn" data-keyword="全聚德(前门店)">全聚德</button>
       </div>
     </div>
     <div class="time-block">
@@ -694,12 +787,21 @@ tr:nth-child(even) { background: #f8f9fa; }
       <p><strong>選項 C：</strong>王府井 / 西單 購物 — 買伴手禮：稻香村糕點、六必居醬菜、北京果脯</p>
       <p><strong>選項 D：</strong>純休息，附近走走吃吃，享受最後半天</p>
       <p><strong>選項 E：</strong>孔廟和國子監博物館（RMB 30/人，需提前 1 天預約）— 從 Day 6 移來，週二開放。國子監街牌樓古樹很有味道，遊覽約 1-1.5 小時。地鐵 2/5 號線「雍和宮站」</p>
+      <div class="nav-btns">
+        <button class="nav-btn" data-lat="39.907771" data-lon="116.400813" data-name="國家博物館">國家博物館</button>
+        <button class="nav-btn" data-lat="39.984457" data-lon="116.495448" data-name="798藝術區">798藝術區</button>
+        <button class="nav-btn" data-lat="39.914589" data-lon="116.410904" data-name="王府井">王府井</button>
+        <button class="nav-btn" data-lat="39.947110" data-lon="116.413052" data-name="孔廟國子監">孔廟國子監</button>
+      </div>
     </div>
     <div class="time-block">
       <div class="time-label">12:00 午餐</div>
       <div class="food">
         <strong>推薦：局氣（前門店）</strong>創意京菜，蜂窩煤炸醬麵很有特色<br>
         人均 ~RMB 80-100
+      </div>
+      <div class="nav-btns">
+        <button class="nav-btn" data-keyword="局气(前门店)">局氣</button>
       </div>
     </div>
     <div class="time-block">
@@ -745,6 +847,9 @@ tr:nth-child(even) { background: #f8f9fa; }
     <div class="time-block">
       <div class="time-label">05:15 抵達首都機場 T2</div>
       <p>國際航班建議提前 2.5-3 小時到機場，辦理登機手續 + 過安檢 + 出境</p>
+      <div class="nav-btns">
+        <button class="nav-btn" data-lat="40.078538" data-lon="116.601144" data-name="首都機場T2">首都機場T2</button>
+      </div>
     </div>
     <div class="time-block">
       <div class="time-label">07:55 起飛</div>
@@ -871,6 +976,81 @@ document.addEventListener('touchend', e => {
   if (diff < 0 && current < tabOrder.length - 1) showTab(tabOrder[current + 1]);
   if (diff > 0 && current > 0) showTab(tabOrder[current - 1]);
 }, { passive: true });
+
+// 高德地圖：手機上優先用原生 scheme 直接喚起 APP，跳過網頁中轉
+(function() {
+  var ua = navigator.userAgent.toLowerCase();
+  var isAndroid = ua.indexOf('android') > -1;
+  var isIOS = /iphone|ipad|ipod/.test(ua);
+
+  // 嘗試用原生 scheme 開啟 APP，失敗則 fallback 到網頁版
+  function tryOpenApp(scheme, fallbackUrl) {
+    var clickTime = Date.now();
+    if (isAndroid) {
+      var iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+      iframe.src = scheme;
+      setTimeout(function() {
+        document.body.removeChild(iframe);
+        if (Date.now() - clickTime < 1500) window.open(fallbackUrl, '_blank');
+      }, 800);
+    } else if (isIOS) {
+      window.location.href = scheme;
+      setTimeout(function() {
+        if (Date.now() - clickTime < 1500) window.open(fallbackUrl, '_blank');
+      }, 800);
+    } else {
+      window.open(fallbackUrl, '_blank');
+    }
+  }
+
+  // 「查看今日景點」總覽按鈕：手機優先開 APP 顯示第一個標記點
+  document.querySelectorAll('.map-link').forEach(function(link) {
+    if (!isAndroid && !isIOS) return;
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var webUrl = this.href;
+      var match = webUrl.match(/markers=([^&]+)/);
+      if (!match) { window.open(webUrl, '_blank'); return; }
+      var firstMarker = decodeURIComponent(match[1]).split('|')[0];
+      var parts = firstMarker.split(',');
+      if (parts.length < 3) { window.open(webUrl, '_blank'); return; }
+      var scheme = (isAndroid ? 'androidamap' : 'iosamap')
+        + '://viewMap?sourceApplication=travel&poiname=' + encodeURIComponent(parts[2])
+        + '&lat=' + parts[1] + '&lon=' + parts[0] + '&dev=0';
+      tryOpenApp(scheme, webUrl);
+    });
+  });
+
+  // 個別導航按鈕：景點用座標，餐廳用關鍵字搜尋
+  document.querySelectorAll('.nav-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var lat = this.dataset.lat;
+      var lon = this.dataset.lon;
+      var name = this.dataset.name;
+      var keyword = this.dataset.keyword;
+
+      if (keyword) {
+        // 餐廳/POI：用關鍵字搜尋直接在 APP 裡找
+        var kw = encodeURIComponent(keyword);
+        var scheme = isAndroid
+          ? 'androidamap://poi?sourceApplication=travel&keywords=' + kw
+          : 'iosamap://poi?sourceApplication=travel&keyword=' + kw;
+        var fallback = 'https://uri.amap.com/search?keyword=' + kw + '&city=%E5%8C%97%E4%BA%AC';
+        tryOpenApp(scheme, fallback);
+      } else if (lat && lon) {
+        // 景點：用座標直接定位
+        var n = encodeURIComponent(name || '');
+        var scheme = (isAndroid ? 'androidamap' : 'iosamap')
+          + '://viewMap?sourceApplication=travel&poiname=' + n
+          + '&lat=' + lat + '&lon=' + lon + '&dev=0';
+        var fallback = 'https://uri.amap.com/marker?position=' + lon + ',' + lat + '&name=' + n + '&callnative=0';
+        tryOpenApp(scheme, fallback);
+      }
+    });
+  });
+})();
 </script>
 </body>
 </html>
