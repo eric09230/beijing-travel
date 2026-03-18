@@ -985,23 +985,27 @@ document.addEventListener('touchend', e => {
 
   // 嘗試用原生 scheme 開啟 APP，失敗則 fallback 到網頁版
   function tryOpenApp(scheme, fallbackUrl) {
-    var clickTime = Date.now();
+    var appOpened = false;
+    function onHide() { appOpened = true; }
+    document.addEventListener('visibilitychange', onHide);
+
+    function fallback() {
+      document.removeEventListener('visibilitychange', onHide);
+      if (!appOpened && !document.hidden) window.location.href = fallbackUrl;
+    }
+
     if (isAndroid) {
       var iframe = document.createElement('iframe');
       iframe.style.display = 'none';
       document.body.appendChild(iframe);
       iframe.src = scheme;
-      setTimeout(function() {
-        document.body.removeChild(iframe);
-        if (Date.now() - clickTime < 1500) window.open(fallbackUrl, '_blank');
-      }, 800);
+      setTimeout(function() { document.body.removeChild(iframe); fallback(); }, 800);
     } else if (isIOS) {
       window.location.href = scheme;
-      setTimeout(function() {
-        if (Date.now() - clickTime < 1500) window.open(fallbackUrl, '_blank');
-      }, 800);
+      setTimeout(fallback, 800);
     } else {
-      window.open(fallbackUrl, '_blank');
+      document.removeEventListener('visibilitychange', onHide);
+      window.location.href = fallbackUrl;
     }
   }
 
