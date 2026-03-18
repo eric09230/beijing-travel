@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北京 7 日家庭旅行計劃 (4/15-4/22)</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", sans-serif;
+  line-height: 1.7;
+  color: #2c3e50;
+  background: #f8f9fa;
+  padding: 20px;
+}
+.container { max-width: 900px; margin: 0 auto; }
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #c0392b;
+  margin: 30px 0 10px;
+}
+.subtitle {
+  text-align: center;
+  color: #7f8c8d;
+  margin-bottom: 10px;
+  font-size: 1.05rem;
+}
+h2 {
+  font-size: 1.5rem;
+  color: #2980b9;
+  border-bottom: 3px solid #3498db;
+  padding-bottom: 8px;
+  margin: 40px 0 20px;
+}
+h3 {
+  font-size: 1.15rem;
+  color: #e67e22;
+  margin: 20px 0 10px;
+}
+
+/* ===== Navigation Bar ===== */
+.nav {
+  display: flex;
+  overflow-x: auto;
+  gap: 4px;
+  padding: 10px 16px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+.nav::-webkit-scrollbar { height: 0; }
+.nav button {
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  padding: 10px 16px;
+  font-size: 0.85rem;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #777;
+  font-weight: 500;
+  transition: 0.2s;
+  white-space: nowrap;
+}
+.nav button:hover { background: #fdedec; color: #c0392b; }
+.nav button.active { background: #c0392b; color: #fff; font-weight: 600; }
+
+.tab { display: none; animation: fadeIn 0.3s; }
+.tab.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ===== Cards & Content ===== */
+.day-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px 30px;
+  margin: 20px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.day-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+.day-badge {
+  background: #c0392b;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+.day-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #2c3e50;
+}
+.day-date {
+  color: #95a5a6;
+  font-size: 0.9rem;
+}
+
+.timeline { padding-left: 20px; border-left: 3px solid #ecf0f1; }
+.time-block { margin-bottom: 18px; position: relative; }
+.time-block::before {
+  content: '';
+  position: absolute;
+  left: -27px;
+  top: 8px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #3498db;
+}
+.time-label {
+  font-weight: 700;
+  color: #2980b9;
+  font-size: 0.95rem;
+}
+.spot-name {
+  font-weight: 700;
+  color: #c0392b;
+}
+.tip {
+  background: #fef9e7;
+  border-left: 4px solid #f39c12;
+  padding: 10px 15px;
+  margin: 10px 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.92rem;
+}
+.important {
+  background: #fdedec;
+  border-left: 4px solid #e74c3c;
+  padding: 10px 15px;
+  margin: 10px 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.92rem;
+}
+.food {
+  background: #eafaf1;
+  border-left: 4px solid #27ae60;
+  padding: 10px 15px;
+  margin: 10px 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.92rem;
+}
+.map-link {
+  display: inline-block;
+  background: #3498db;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin: 8px 0 12px;
+  transition: background 0.2s;
+}
+.map-link:hover { background: #2074a8; }
+.map-link::before { content: '\1F4CD '; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px 0;
+  font-size: 0.95rem;
+}
+th {
+  background: #2980b9;
+  color: #fff;
+  padding: 10px 12px;
+  text-align: left;
+}
+td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #ecf0f1;
+}
+tr:nth-child(even) { background: #f8f9fa; }
+
+.budget-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 25px;
+  margin: 15px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.budget-total {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #c0392b;
+  text-align: right;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 2px solid #e74c3c;
+}
+
+.checklist { list-style: none; padding: 0; }
+.checklist li {
+  padding: 8px 0 8px 30px;
+  position: relative;
+  border-bottom: 1px dashed #ecf0f1;
+}
+.checklist li::before {
+  content: '\2610';
+  position: absolute;
+  left: 5px;
+  color: #e74c3c;
+  font-size: 1.1rem;
+}
+
+.hotel-option {
+  background: #eaf2f8;
+  border-radius: 8px;
+  padding: 15px 20px;
+  margin: 10px 0;
+}
+
+@media (max-width: 600px) {
+  .nav button { padding: 8px 12px; font-size: 0.8rem; }
+}
+@media print {
+  body { background: #fff; padding: 0; }
+  .nav { display: none !important; }
+  .tab { display: block !important; }
+  .day-card, .budget-card { box-shadow: none; border: 1px solid #ddd; }
+  .day-card { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>北京 7 日家庭旅行計劃</h1>
+<p class="subtitle">2026/4/15 (三) ~ 4/22 (三) ｜ 3 人同行（爸媽＋我）｜ 悠閒節奏</p>
+
+<!-- ===== Navigation Bar ===== -->
+<div class="nav" id="nav">
+  <button class="active" onclick="showTab('overview')">&#127968; 總覽</button>
+  <button onclick="showTab('day1')">Day1 抵達</button>
+  <button onclick="showTab('day2')">Day2 故宮</button>
+  <button onclick="showTab('day3')">Day3 長城</button>
+  <button onclick="showTab('day4')">Day4 頤和園</button>
+  <button onclick="showTab('day5')">Day5 天壇</button>
+  <button onclick="showTab('day6')">Day6 胡同</button>
+  <button onclick="showTab('day7')">Day7 自由</button>
+  <button onclick="showTab('day8')">Day8 回家</button>
+  <button onclick="showTab('info')">&#128196; 資訊</button>
+  <button onclick="showTab('budget')">&#128176; 預算</button>
+</div>
+
+<!-- ==================== 總覽 Tab ==================== -->
+<div class="tab active" id="tab-overview">
+
+<h2>一、行前準備清單</h2>
+
+<div class="day-card">
+<h3>必辦事項（依時間排序）</h3>
+<ul class="checklist">
+  <li><strong>即刻</strong>：確認台胞證有效期（須超過 2026/10/22）</li>
+  <li><strong>即刻</strong>：下載 APP —「億通行」（地鐵掃碼）、「高德地圖」（導航）、「支付寶」（付款）</li>
+  <li><strong>4/5 起</strong>：預約國家博物館門票（提前 5 天，若安排的話）</li>
+  <li><strong>4/9 20:00</strong>：搶故宮門票（提前 7 天放票，4/16 的票）→ 微信小程序「故宮博物院」</li>
+  <li><strong>4/10 前</strong>：預約慕田峪長城門票（提前 3 天以上較保險）</li>
+  <li><strong>4/14 前</strong>：預約頤和園、天壇門票（提前 1 天即可，但早訂安心）</li>
+  <li><strong>4/14 前</strong>：訂好住宿（見下方推薦）</li>
+  <li><strong>4/14 前</strong>：確認支付寶可正常使用（綁定信用卡或儲值）</li>
+</ul>
+
+<div class="important">
+  <strong>故宮搶票提醒：</strong>故宮每日限流 3 萬人，旺季門票非常搶手。4/9（四）晚上 20:00 整，準時在微信小程序「故宮博物院」搶 4/16 的票。建議三人同時搶，提前登錄好帳號並填好個人資訊。如果 4/16 搶不到，備案改為 4/18 或 4/19。
+</div>
+
+<h3>行李建議（4 月中旬北京天氣：10~25°C）</h3>
+<table>
+  <tr><th>類別</th><th>建議</th></tr>
+  <tr><td>衣物</td><td>薄外套（必帶）＋ 長袖 ＋ 短袖，早晚溫差大約 10-15 度；長城風大需防風外套</td></tr>
+  <tr><td>鞋子</td><td>舒適好走的運動鞋（每天步行 1-2 萬步）</td></tr>
+  <tr><td>防曬</td><td>帽子、防曬乳、墨鏡（北京 4 月紫外線已偏強）</td></tr>
+  <tr><td>其他</td><td>口罩（沙塵天氣備用）、小摺疊椅（給爸媽排隊用）、行動電源</td></tr>
+</table>
+</div>
+
+<h2>二、住宿推薦</h2>
+
+<div class="day-card">
+<p>三人一間房，預算約 <strong>RMB 400-600/晚</strong>（約 TWD 1,800-2,700）</p>
+
+<div class="hotel-option">
+  <h3>前 6 晚：市中心（前門 / 王府井 / 東單 區域）</h3>
+  <p><strong>推薦原因：</strong>步行可達故宮、天安門、前門大街，地鐵 1/2/5 號線交匯，去哪都方便</p>
+  <p><strong>建議搜尋關鍵字：</strong>攜程/Trip.com 搜「前門 三人間」或「王府井 家庭房」</p>
+  <table>
+    <tr><th>類型</th><th>價位 (RMB/晚)</th><th>說明</th></tr>
+    <tr><td>經濟型三人間</td><td>300-400</td><td>如 7 天連鎖、如家等，乾淨但空間較小</td></tr>
+    <tr><td>中檔家庭房</td><td>400-600</td><td>四星級酒店，含早餐，空間舒適</td></tr>
+    <tr><td>特色四合院民宿</td><td>500-800</td><td>體驗老北京風情，但設施較簡單</td></tr>
+  </table>
+</div>
+
+<div class="hotel-option">
+  <h3>第 7 晚（4/21）：首都機場附近</h3>
+  <p><strong>推薦原因：</strong>回程 07:55 起飛，須 05:30 前到機場，住機場旁最安心</p>
+  <p><strong>建議搜尋：</strong>「首都機場 酒店」，很多提供免費接送機場班車</p>
+  <table>
+    <tr><th>類型</th><th>價位 (RMB/晚)</th><th>說明</th></tr>
+    <tr><td>機場快捷酒店</td><td>200-350</td><td>含接送，睡一晚就走</td></tr>
+    <tr><td>希爾頓歡朋/Ibis</td><td>350-500</td><td>品牌連鎖，品質穩定</td></tr>
+  </table>
+</div>
+
+<div class="tip">
+  <strong>住宿預算估算：</strong>前 6 晚 × RMB 450 + 最後 1 晚 × RMB 300 = 約 RMB 3,000（TWD ~13,500）
+</div>
+</div>
+
+<div class="tip">
+  <strong>地圖說明：</strong>每日行程附有「高德地圖」連結，標示當天所有景點位置。在台灣可直接用瀏覽器開啟查看；到了中國手機點擊會自動跳轉高德地圖 APP 導航。（Google Maps 在中國無法使用）
+</div>
+
+</div><!-- /tab-overview -->
+
+<!-- ==================== Day 1 Tab ==================== -->
+<div class="tab" id="tab-day1">
+<div class="day-card">
+  <div class="day-header">
+    <span class="day-badge">Day 1</span>
+    <div>
+      <div class="day-title">抵達北京 + 前門大街散步</div>
+      <div class="day-date">4/15（三）</div>
+    </div>
+  </div>
+  <a class="map-link" href="https://uri.amap.com/marker?markers=116.601144,40.078538,首都機場T2|116.397755,39.899168,前門大街|116.395324,39.897861,大柵欄&callnative=1" target="_blank">在高德地圖查看今日景點</a>
+  <div class="timeline">
+    <div class="time-block">
+      <div class="time-label">16:35 抵達首都機場 T2</div>
+      <p>下飛機 → 過海關（台胞證）→ 提領行李，預計 17:30 出關</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">17:30 機場 → 市區酒店</div>
+      <p><strong>推薦方式：</strong>搭計程車/滴滴打車 到前門或王府井區域，車程約 40-60 分鐘，費用約 RMB 120-150（含機場附加費）</p>
+      <p>備選：機場快線（Airport Express）到東直門站 → 轉地鐵 2 號線到前門站，費用 RMB 25+3，約 70 分鐘</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">18:30 辦理入住，稍作休息</div>
+    </div>
+    <div class="time-block">
+      <div class="time-label">19:30 前門大街 + 大柵欄 散步</div>
+      <p>走走逛逛老街，感受北京夜景，買點小吃</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">20:30 晚餐</div>
+      <div class="food">
+        <strong>推薦：</strong>四季民福（前門店）或都一處（燒賣老字號）<br>
+        人均 ~RMB 80-120，三人約 RMB 250-360
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time-label">21:30 回酒店休息</div>
+      <p>早點休息，調整狀態，明天故宮需要早起</p>
+    </div>
+  </div>
+  <div class="tip">
+    <strong>今日提醒：</strong>到酒店後連上 WiFi 測試支付寶、高德地圖是否正常。億通行 APP 開通「北京地鐵乘車碼」。
+  </div>
+</div>
+</div><!-- /tab-day1 -->
+
+<!-- ==================== Day 2 Tab ==================== -->
+<div class="tab" id="tab-day2">
+<div class="day-card">
+  <div class="day-header">
+    <span class="day-badge">Day 2</span>
+    <div>
+      <div class="day-title">故宮博物院 + 景山公園</div>
+      <div class="day-date">4/16（四）</div>
+    </div>
+  </div>
+  <a class="map-link" href="https://uri.amap.com/marker?markers=116.397428,39.90923,天安門廣場|116.397026,39.917094,故宮午門|116.396784,39.924091,景山公園&callnative=1" target="_blank">在高德地圖查看今日景點</a>
+  <div class="timeline">
+    <div class="time-block">
+      <div class="time-label">07:00 早餐</div>
+      <p>酒店早餐或附近早餐店（豆漿油條、包子）</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">07:30 前往天安門廣場</div>
+      <p>步行或搭地鐵 1 號線「天安門東站」→ 先在天安門廣場拍照留念</p>
+      <p>安檢 + 步行到午門約需 30-40 分鐘，須提早出發。需攜帶台胞證</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">08:30 進入故宮（午門入口）</div>
+      <p><span class="spot-name">故宮博物院</span>｜門票：旺季 RMB 60/人 × 3 = RMB 180</p>
+      <p><strong>建議路線（4-5 小時）：</strong></p>
+      <p>午門 → 太和殿 → 中和殿 → 保和殿 → 珍寶館（額外 RMB 10/人）→ 鐘錶館（RMB 10/人）→ 乾清宮 → 交泰殿 → 坤寧宮 → 御花園 → 神武門出</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">12:30 午餐</div>
+      <div class="food">
+        <strong>故宮內有餐廳</strong>（冰窖餐廳），或出神武門後在景山附近用餐<br>
+        人均 ~RMB 50-80
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time-label">13:30 景山公園</div>
+      <p><span class="spot-name">景山公園</span>｜門票：RMB 10/人（4 月牡丹節期間）</p>
+      <p>就在故宮神武門正對面，登上萬春亭可俯瞰整個故宮全景，是最佳拍攝點</p>
+      <p>山不高，慢走 15 分鐘即可到頂，有觀光車可坐（RMB 10/人）</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">15:00 回酒店休息</div>
+      <p>故宮走一天會很累，特別是爸媽，回去休息 2 小時</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">17:30 晚餐 — 北京烤鴨</div>
+      <div class="food">
+        <strong>推薦：四季民福（故宮店）</strong>可邊吃烤鴨邊看故宮角樓<br>
+        或<strong>便宜坊（鮮魚口店）</strong>，燜爐烤鴨，600 年歷史<br>
+        人均 ~RMB 115-150，三人約 RMB 350-450
+      </div>
+    </div>
+  </div>
+  <div class="important">
+    <strong>門票提醒：</strong>故宮門票必須提前 7 天在微信小程序「故宮博物院」預約！4/9 晚上 20:00 搶 4/16 的票。每人需要台胞證號碼。
+  </div>
+  <div class="tip">
+    <strong>貼心提示：</strong>故宮很大，全程走完約 2-3 公里。建議給爸媽穿最舒適的鞋，故宮午門提供輪椅租借（押金 RMB 500）。每走 30 分鐘找椅子休息。
+  </div>
+</div>
+</div><!-- /tab-day2 -->
+
+<!-- ==================== Day 3 Tab ==================== -->
+<div class="tab" id="tab-day3">
+<div class="day-card">
+  <div class="day-header">
+    <span class="day-badge">Day 3</span>
+    <div>
+      <div class="day-title">慕田峪長城</div>
+      <div class="day-date">4/17（五）</div>
+    </div>
+  </div>
+  <a class="map-link" href="https://uri.amap.com/marker?markers=116.565808,40.441400,慕田峪長城&callnative=1" target="_blank">在高德地圖查看今日景點</a>
+  <div class="timeline">
+    <div class="time-block">
+      <div class="time-label">06:45 早餐後出發</div>
+      <p><strong>交通：</strong>建議包車前往，車程約 1.5 小時（提早出發錯開纜車排隊高峰）</p>
+      <p>包車費用：約 RMB 600-700/天（含來回等候）</p>
+      <p>可在酒店前台或高德地圖叫車，也可請酒店代訂</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">08:15 抵達慕田峪長城</div>
+      <p><span class="spot-name">慕田峪長城</span>｜門票：RMB 40/人 × 3 = RMB 120</p>
+      <p><strong>為什麼選慕田峪而非八達嶺？</strong></p>
+      <p>遊客量僅八達嶺的 1/4、台階更平緩、有纜車和滑道、風景更原始壯觀</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">09:00 纜車上城</div>
+      <p>纜車：單程 RMB 100/人，往返 RMB 120/人 × 3 = RMB 360</p>
+      <p>纜車到 14 號敵樓 → 往東走到 20 號敵樓（好漢坡）→ 折返</p>
+      <p>下山方式：搭纜車下山（較穩，適合爸媽）或滑道下山（較刺激，可自行選擇）</p>
+      <p>在長城上慢慢走，拍照看風景，約 2-3 小時</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">12:00 午餐</div>
+      <div class="food">
+        景區出口附近有農家院，可以吃農家菜<br>
+        人均 ~RMB 50-80
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time-label">13:30 返回市區</div>
+      <p>車程約 1.5-2 小時（視交通狀況）</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">15:30 回酒店休息</div>
+      <p>長城比較耗體力，下午好好休息</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">18:00 晚餐</div>
+      <div class="food">
+        <strong>推薦：南門涮肉</strong>或<strong>聚寶源（牛街店）</strong>涮羊肉<br>
+        人均 ~RMB 100-120，三人約 RMB 300-360
+      </div>
+    </div>
+  </div>
+  <div class="tip">
+    <strong>長城穿著：</strong>4 月長城上風大且涼，務必帶防風外套。穿防滑運動鞋。建議帶水和零食上城。
+  </div>
+</div>
+</div><!-- /tab-day3 -->
+
+<!-- ==================== Day 4 Tab ==================== -->
+<div class="tab" id="tab-day4">
+<div class="day-card">
+  <div class="day-header">
+    <span class="day-badge">Day 4</span>
+    <div>
+      <div class="day-title">頤和園 + 圓明園</div>
+      <div class="day-date">4/18（六）</div>
+    </div>
+  </div>
+  <a class="map-link" href="https://uri.amap.com/marker?markers=116.272847,39.993456,頤和園(北宮門)|116.298256,40.008612,圓明園&callnative=1" target="_blank">在高德地圖查看今日景點</a>
+  <div class="timeline">
+    <div class="time-block">
+      <div class="time-label">08:00 早餐後出發</div>
+      <p>地鐵 4 號線「北宮門站」，約 40 分鐘到達</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">09:00 頤和園</div>
+      <p><span class="spot-name">頤和園</span>｜聯票：旺季 RMB 60/人 × 3 = RMB 180（含佛香閣、蘇州街等）</p>
+      <p><strong>建議路線（3-4 小時）：</strong></p>
+      <p>北宮門進 → 蘇州街 → 佛香閣（登高俯瞰昆明湖）→ 長廊（728 米彩繪長廊）→ 石舫 → 乘船遊昆明湖到十七孔橋 → 東宮門出</p>
+      <p>（四大部洲可視體力決定是否略過，優先保留搭船和十七孔橋）</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">12:30 午餐</div>
+      <div class="food">
+        頤和園東宮門附近有餐廳，或打車到圓明園附近的北大/清華周邊用餐<br>
+        人均 ~RMB 40-60
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time-label">14:00 圓明園</div>
+      <p><span class="spot-name">圓明園遺址公園</span>｜門票：RMB 10/人，西洋樓遺址 +RMB 15/人 × 3 = RMB 75</p>
+      <p>重點看西洋樓遺址（大水法），了解歷史。園區很大，不用全走完</p>
+      <p>遊覽時間：約 1.5-2 小時</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">16:00 返回市區（提早出發避免趕路）</div>
+      <p>地鐵 4 號線「圓明園站」回前門，約 50 分鐘</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">18:00 晚餐</div>
+      <div class="food">
+        <strong>推薦：大董烤鴨（東四十條店）</strong>體驗創新烤鴨<br>
+        或<strong>小大董</strong>（平價版），人均 ~RMB 140-196<br>
+        三人約 RMB 420-590
+      </div>
+    </div>
+  </div>
+  <div class="tip">
+    <strong>省力提示：</strong>頤和園內可搭畫舫船遊昆明湖（~RMB 20/人），既省體力又能賞湖景。長廊沿途有很多座椅可休息。4 月頤和園桃花盛開，很美！
+  </div>
+</div>
+</div><!-- /tab-day4 -->
+
+<!-- ==================== Day 5 Tab ==================== -->
+<div class="tab" id="tab-day5">
+<div class="day-card">
+  <div class="day-header">
+    <span class="day-badge">Day 5</span>
+    <div>
+      <div class="day-title">天壇 + 什剎海胡同文化</div>
+      <div class="day-date">4/19（日）</div>
+    </div>
+  </div>
+  <a class="map-link" href="https://uri.amap.com/marker?markers=116.418756,39.882085,天壇(東門)|116.366700,39.892944,牛街美食|116.384544,39.940647,什剎海|116.382463,39.937774,恭王府&callnative=1" target="_blank">在高德地圖查看今日景點</a>
+  <div class="timeline">
+    <div class="time-block">
+      <div class="time-label">08:30 前往天壇</div>
+      <p>地鐵 5 號線「天壇東門站」，如果住前門可步行 30-40 分鐘到達（約 3 公里），或搭地鐵 8 號線更快</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">09:00 天壇公園</div>
+      <p><span class="spot-name">天壇公園</span>｜聯票：旺季 RMB 34/人 × 3 = RMB 102（含祈年殿、回音壁、圜丘）</p>
+      <p><strong>路線：</strong>東門進 → 祈年殿 → 皇穹宇 → 回音壁 → 圜丘 → 南門出</p>
+      <p>遊覽約 2-2.5 小時，早上可以看到很多大爺大媽在公園運動，很有生活氣息</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">11:30 午餐</div>
+      <div class="food">
+        <strong>推薦：牛街美食</strong>（天壇南門打車 10 分鐘）<br>
+        聚寶源涮肉（建議提前微信線上取號，現場排隊常超 1 小時）<br>
+        免排隊備選：洪記包子、白記年糕、伊寶荷葉甑糕<br>
+        人均 ~RMB 50-80
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time-label">13:30 回酒店午休</div>
+      <p>休息 1-1.5 小時，為下午胡同行儲備體力</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">15:00 什剎海 + 胡同</div>
+      <p><span class="spot-name">什剎海</span>（免費）→ <span class="spot-name">恭王府</span>（門票 RMB 40/人 × 3 = RMB 120）</p>
+      <p>可搭人力三輪車逛胡同（~RMB 150/車，可坐 2-3 人），車夫會講解胡同故事</p>
+      <p>路線：前海西街 → 銀錠橋 → 菸袋斜街 → 恭王府</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">17:30 後海 / 菸袋斜街 散步</div>
+      <p>沿著後海湖邊走走，欣賞夕陽湖景</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">18:30 晚餐</div>
+      <div class="food">
+        <strong>推薦：烤肉季（什剎海店）</strong>，老字號，看著後海吃烤肉<br>
+        或<strong>護國寺小吃</strong>嘗傳統北京點心（麵茶、豌豆黃、驢打滾）<br>
+        人均 ~RMB 60-120
+      </div>
+    </div>
+  </div>
+</div>
+</div><!-- /tab-day5 -->
+
+<!-- ==================== Day 6 Tab ==================== -->
+<div class="tab" id="tab-day6">
+<div class="day-card">
+  <div class="day-header">
+    <span class="day-badge">Day 6</span>
+    <div>
+      <div class="day-title">雍和宮 + 鼓樓 + 南鑼鼓巷</div>
+      <div class="day-date">4/20（一）週一</div>
+    </div>
+  </div>
+  <a class="map-link" href="https://uri.amap.com/marker?markers=116.417197,39.947893,雍和宮|116.396489,39.940982,鼓樓|116.403038,39.937385,南鑼鼓巷|116.404879,39.946927,五道營胡同&callnative=1" target="_blank">在高德地圖查看今日景點</a>
+  <div class="timeline">
+    <div class="time-block">
+      <div class="time-label">08:30 雍和宮（08:00 開園，提早避開上香高峰）</div>
+      <p><span class="spot-name">雍和宮</span>｜門票：RMB 25/人 × 3 = RMB 75</p>
+      <p>北京最大的藏傳佛教寺院，香火旺盛，18 米高的檀木彌勒佛像很壯觀</p>
+      <p>遊覽約 1.5 小時</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">10:00 鼓樓</div>
+      <p><span class="spot-name">鼓樓</span>｜門票：RMB 20/人 × 3 = RMB 60</p>
+      <p>北京中軸線上的地標建築，登上鼓樓可俯瞰整片胡同區，還有擊鼓表演</p>
+      <p>距雍和宮約 15 分鐘車程，與南鑼鼓巷步行僅 5 分鐘，動線順暢</p>
+      <p>遊覽約 1 小時</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">11:30 午餐（提早避開排隊高峰）</div>
+      <div class="food">
+        <strong>推薦：方磚廠 69 號炸醬麵</strong>（雍和宮附近），體驗老北京炸醬麵<br>
+        人均 ~RMB 30-40
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time-label">13:00 南鑼鼓巷</div>
+      <p><span class="spot-name">南鑼鼓巷</span>（免費），文藝小巷，很多特色小店和小吃</p>
+      <p>推薦：文宇乳酪（雙皮奶）、各種文創小店</p>
+      <p>也可走進旁邊的小胡同，比主街安靜有趣</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">15:00 五道營胡同（可選）</div>
+      <p>比南鑼鼓巷安靜的文藝胡同，有咖啡館可以坐下休息</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">16:30 回酒店休息</div>
+    </div>
+    <div class="time-block">
+      <div class="time-label">18:00 晚餐</div>
+      <div class="food">
+        <strong>推薦：東來順（王府井店）</strong>百年老字號涮羊肉<br>
+        或<strong>全聚德（前門店）</strong>體驗老字號烤鴨<br>
+        人均 ~RMB 120-160，三人約 RMB 360-480
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time-label">19:30 王府井步行街 散步（可選）</div>
+      <p>逛逛夜晚的王府井，買些伴手禮</p>
+    </div>
+  </div>
+  <div class="tip">
+    <strong>週一注意：</strong>大部分博物館週一閉館（包含孔廟國子監），但雍和宮、鼓樓、南鑼鼓巷照常開放。孔廟國子監已移至 Day 7 自由活動選項。
+  </div>
+</div>
+</div><!-- /tab-day6 -->
+
+<!-- ==================== Day 7 Tab ==================== -->
+<div class="tab" id="tab-day7">
+<div class="day-card">
+  <div class="day-header">
+    <span class="day-badge">Day 7</span>
+    <div>
+      <div class="day-title">自由活動 + 轉住機場酒店</div>
+      <div class="day-date">4/21（二）</div>
+    </div>
+  </div>
+  <a class="map-link" href="https://uri.amap.com/marker?markers=116.400813,39.907771,國家博物館|116.495448,39.984457,798藝術區|116.410904,39.914589,王府井|116.413052,39.947110,孔廟國子監&callnative=1" target="_blank">在高德地圖查看自由活動選項</a>
+  <div class="timeline">
+    <div class="time-block">
+      <div class="time-label">09:00 睡到自然醒，悠閒早餐</div>
+    </div>
+    <div class="time-block">
+      <div class="time-label">10:00 自由活動（以下選一）</div>
+      <p><strong>選項 A：</strong>國家博物館（免費，需提前預約）— 如果對歷史有興趣，「古代中國」常設展非常值得，3-4 小時</p>
+      <p><strong>選項 B：</strong>798 藝術區 — 現代藝術園區，拍照好看，逛 2-3 小時</p>
+      <p><strong>選項 C：</strong>王府井 / 西單 購物 — 買伴手禮：稻香村糕點、六必居醬菜、北京果脯</p>
+      <p><strong>選項 D：</strong>純休息，附近走走吃吃，享受最後半天</p>
+      <p><strong>選項 E：</strong>孔廟和國子監博物館（RMB 30/人，需提前 1 天預約）— 從 Day 6 移來，週二開放。國子監街牌樓古樹很有味道，遊覽約 1-1.5 小時。地鐵 2/5 號線「雍和宮站」</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">12:00 午餐</div>
+      <div class="food">
+        <strong>推薦：局氣（前門店）</strong>創意京菜，蜂窩煤炸醬麵很有特色<br>
+        人均 ~RMB 80-100
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time-label">14:00 退房，收拾行李</div>
+    </div>
+    <div class="time-block">
+      <div class="time-label">15:00 前往機場附近酒店</div>
+      <p>打車或地鐵到首都機場附近酒店，車程約 40-60 分鐘</p>
+      <p>入住後休息，為明天早起做準備</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">18:00 晚餐</div>
+      <div class="food">
+        在機場酒店附近用餐，或讓酒店幫忙叫外賣
+      </div>
+    </div>
+    <div class="time-block">
+      <div class="time-label">21:00 早點睡</div>
+      <p>明天需要很早起床！設好鬧鐘！</p>
+    </div>
+  </div>
+  <div class="important">
+    <strong>重要：</strong>確認明天去機場的交通方式。建議請酒店安排早班送機車，或前一天就約好滴滴/出租車。
+  </div>
+</div>
+</div><!-- /tab-day7 -->
+
+<!-- ==================== Day 8 Tab ==================== -->
+<div class="tab" id="tab-day8">
+<div class="day-card">
+  <div class="day-header">
+    <span class="day-badge">Day 8</span>
+    <div>
+      <div class="day-title">回家！</div>
+      <div class="day-date">4/22（三）</div>
+    </div>
+  </div>
+  <a class="map-link" href="https://uri.amap.com/marker?markers=116.601144,40.078538,首都機場T2&callnative=1" target="_blank">在高德地圖查看機場位置</a>
+  <div class="timeline">
+    <div class="time-block">
+      <div class="time-label">04:45 起床，退房</div>
+    </div>
+    <div class="time-block">
+      <div class="time-label">05:15 抵達首都機場 T2</div>
+      <p>國際航班建議提前 2.5-3 小時到機場，辦理登機手續 + 過安檢 + 出境</p>
+    </div>
+    <div class="time-block">
+      <div class="time-label">07:55 起飛</div>
+      <p>北京 (PEK) → 台北 (TPE)，直飛，11:25 抵達桃園機場</p>
+    </div>
+  </div>
+  <div class="tip">
+    <strong>提醒：</strong>國際航班建議預留 2.5-3 小時。北京首都機場 T2 不算太大，05:15 到可從容辦手續並逛免稅店。
+  </div>
+</div>
+</div><!-- /tab-day8 -->
+
+<!-- ==================== 實用資訊 Tab ==================== -->
+<div class="tab" id="tab-info">
+
+<h2>五、實用資訊速查</h2>
+
+<div class="day-card">
+<h3>門票預約一覽表</h3>
+<table>
+  <tr><th>景點</th><th>預約方式</th><th>提前天數</th><th>你的搶票日期</th><th>門票/人</th></tr>
+  <tr><td>故宮</td><td>微信小程序「故宮博物院」</td><td>7 天</td><td><strong>4/9 晚 20:00</strong></td><td>RMB 60</td></tr>
+  <tr><td>慕田峪長城</td><td>微信小程序「慕田峪長城」</td><td>3 天+</td><td>4/14 前</td><td>RMB 40</td></tr>
+  <tr><td>頤和園</td><td>微信小程序「頤和園」</td><td>1 天</td><td>4/17</td><td>RMB 60（聯票）</td></tr>
+  <tr><td>天壇</td><td>微信小程序「天壇」</td><td>1 天</td><td>4/18</td><td>RMB 34（聯票）</td></tr>
+  <tr><td>恭王府</td><td>微信小程序「恭王府」</td><td>1 天</td><td>4/18</td><td>RMB 40</td></tr>
+  <tr><td>雍和宮</td><td>微信/支付寶搜「雍和宮」</td><td>1 天</td><td>4/19</td><td>RMB 25</td></tr>
+  <tr><td>國家博物館</td><td>官網或微信公眾號</td><td>5 天</td><td>4/16（若去的話）</td><td>免費</td></tr>
+</table>
+
+<h3>交通小抄</h3>
+<table>
+  <tr><th>方式</th><th>說明</th></tr>
+  <tr><td>地鐵</td><td>「億通行」APP 掃碼進站，RMB 3 元起。運營時間約 05:00-23:30</td></tr>
+  <tr><td>打車</td><td>支付寶內建「滴滴出行」或「高德打車」，輸入目的地即可叫車</td></tr>
+  <tr><td>公車</td><td>支付寶掃碼或億通行，RMB 2 元</td></tr>
+</table>
+
+<h3>緊急聯繫</h3>
+<table>
+  <tr><th>項目</th><th>電話</th></tr>
+  <tr><td>報警</td><td>110</td></tr>
+  <tr><td>急救</td><td>120</td></tr>
+  <tr><td>台灣海基會緊急聯繫</td><td>+886-2-2533-9995</td></tr>
+</table>
+</div>
+
+</div><!-- /tab-info -->
+
+<!-- ==================== 預算 Tab ==================== -->
+<div class="tab" id="tab-budget">
+
+<h2>四、預算估算（3 人合計，RMB & TWD）</h2>
+
+<div class="budget-card">
+<table>
+  <tr><th>項目</th><th>預估費用 (RMB)</th><th>換算 TWD（×4.5）</th><th>備註</th></tr>
+  <tr><td><strong>住宿 7 晚</strong></td><td>3,000 - 3,500</td><td>13,500 - 15,750</td><td>前 6 晚市中心 + 最後 1 晚機場</td></tr>
+  <tr><td><strong>餐飲 8 天</strong></td><td>2,500 - 3,500</td><td>11,250 - 15,750</td><td>3 人每天 ~RMB 350-450</td></tr>
+  <tr><td><strong>門票</strong></td><td>1,200 - 1,500</td><td>5,400 - 6,750</td><td>故宮+長城+頤和園+天壇+恭王府+雍和宮+鼓樓+圓明園 等（孔廟為 Day 7 選項）</td></tr>
+  <tr><td><strong>交通</strong></td><td>1,000 - 1,500</td><td>4,500 - 6,750</td><td>地鐵+打車+長城包車+機場交通</td></tr>
+  <tr><td><strong>長城纜車</strong></td><td>360</td><td>1,620</td><td>3 人往返纜車</td></tr>
+  <tr><td><strong>伴手禮/雜支</strong></td><td>500 - 1,000</td><td>2,250 - 4,500</td><td>稻香村、紀念品等</td></tr>
+</table>
+<div class="budget-total">
+  預估總計：RMB 8,560 - 11,360 ≈ TWD 38,500 - 51,100（3 人合計）
+</div>
+<div class="tip" style="margin-top: 15px;">
+  在你的預算 TWD 48,000 ~ 60,000 範圍內，屬於舒適等級。如果省一點吃住可以控制在 4 萬以內；如果想吃好住好，5 萬多也夠用。
+</div>
+</div>
+
+<h2>六、每日預估花費明細（3 人合計 RMB）</h2>
+
+<div class="budget-card">
+<table>
+  <tr><th>日期</th><th>住宿</th><th>餐飲</th><th>門票</th><th>交通</th><th>小計</th></tr>
+  <tr><td>Day 1 (4/15)</td><td>450</td><td>300</td><td>0</td><td>140</td><td>890</td></tr>
+  <tr><td>Day 2 (4/16)</td><td>450</td><td>500</td><td>270</td><td>30</td><td>1,250</td></tr>
+  <tr><td>Day 3 (4/17)</td><td>450</td><td>400</td><td>480</td><td>650</td><td>1,980</td></tr>
+  <tr><td>Day 4 (4/18)</td><td>450</td><td>500</td><td>255</td><td>50</td><td>1,255</td></tr>
+  <tr><td>Day 5 (4/19)</td><td>450</td><td>350</td><td>222</td><td>180</td><td>1,202</td></tr>
+  <tr><td>Day 6 (4/20)</td><td>450</td><td>450</td><td>135</td><td>40</td><td>1,075</td></tr>
+  <tr><td>Day 7 (4/21)</td><td>300</td><td>350</td><td>0</td><td>130</td><td>780</td></tr>
+  <tr><td>Day 8 (4/22)</td><td>0</td><td>0</td><td>0</td><td>30</td><td>30</td></tr>
+  <tr style="font-weight:700; background:#ffeaa7;">
+    <td>合計</td><td>3,000</td><td>2,850</td><td>1,362</td><td>1,250</td><td><strong>~8,462</strong></td>
+  </tr>
+</table>
+<div class="budget-total">
+  預估合計：RMB ~8,460 ≈ TWD ~38,000（3 人合計）<br>
+  加上伴手禮等雜支，總花費約 TWD 40,000 - 47,000
+</div>
+</div>
+
+</div><!-- /tab-budget -->
+
+<div class="day-card" style="margin-top: 30px; text-align: center; color: #7f8c8d;">
+  <p>祝旅途愉快！第一次的北京之旅一定會很精彩！</p>
+  <p style="font-size: 0.85rem; margin-top: 10px;">最後更新：2026/03/18</p>
+</div>
+
+</div><!-- /container -->
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  const btns = document.querySelectorAll('.nav button');
+  const map = { overview:0, day1:1, day2:2, day3:3, day4:4, day5:5, day6:6, day7:7, day8:8, info:9, budget:10 };
+  if (map[id] !== undefined) btns[map[id]].classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Swipe support for mobile
+let touchStartX = 0;
+const tabOrder = ['overview','day1','day2','day3','day4','day5','day6','day7','day8','info','budget'];
+document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+document.addEventListener('touchend', e => {
+  const diff = e.changedTouches[0].screenX - touchStartX;
+  if (Math.abs(diff) < 80) return;
+  const current = tabOrder.findIndex(id => document.getElementById('tab-' + id).classList.contains('active'));
+  if (diff < 0 && current < tabOrder.length - 1) showTab(tabOrder[current + 1]);
+  if (diff > 0 && current > 0) showTab(tabOrder[current - 1]);
+}, { passive: true });
+</script>
+</body>
+</html>
