@@ -1290,14 +1290,16 @@ function showTab(id) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Swipe support for mobile
-let touchStartX = 0, touchStartY = 0;
+// Swipe support for mobile (skip when swiping inside the nav bar)
+let touchStartX = 0, touchStartY = 0, touchStartedInNav = false;
 const tabOrder = ['overview','day1','day2','day3','day4','day5','day6','day7','day8','food','info','budget'];
 document.addEventListener('touchstart', e => {
   touchStartX = e.changedTouches[0].screenX;
   touchStartY = e.changedTouches[0].screenY;
+  touchStartedInNav = !!e.target.closest('.nav');
 }, { passive: true });
 document.addEventListener('touchend', e => {
+  if (touchStartedInNav) return;
   const diffX = e.changedTouches[0].screenX - touchStartX;
   const diffY = e.changedTouches[0].screenY - touchStartY;
   if (Math.abs(diffX) < 80 || Math.abs(diffY) > Math.abs(diffX)) return;
