@@ -389,7 +389,7 @@ tr:nth-child(even) { background: #f8f9fa; }
     <span class="flight-time">13:05</span> TPE 桃園機場 T2 →
     <span class="flight-time">16:35</span> PEK 北京首都機場 T2
   </div>
-  <a class="map-link" href="https://uri.amap.com/marker?markers=116.601144,40.078538,首都機場T2|116.397755,39.899168,前門大街|116.395324,39.897861,大柵欄&callnative=1" target="_blank">在高德地圖查看今日景點</a>
+  <a class="map-link" href="https://uri.amap.com/marker?markers=116.601144,40.078538,首都機場T2|116.4344,39.8982,晶橙飯店|116.397755,39.899168,前門大街|116.395324,39.897861,大柵欄&callnative=1" target="_blank">在高德地圖查看今日景點</a>
   <div class="timeline">
     <div class="time-block">
       <div class="time-label">16:35 抵達首都機場 T2</div>
@@ -1049,20 +1049,27 @@ function showTab(id) {
   document.getElementById('tab-' + id).classList.add('active');
   const btns = document.querySelectorAll('.nav button');
   const map = { overview:0, day1:1, day2:2, day3:3, day4:4, day5:5, day6:6, day7:7, day8:8, info:9, budget:10 };
-  if (map[id] !== undefined) btns[map[id]].classList.add('active');
+  if (map[id] !== undefined) {
+    btns[map[id]].classList.add('active');
+    btns[map[id]].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Swipe support for mobile
-let touchStartX = 0;
+let touchStartX = 0, touchStartY = 0;
 const tabOrder = ['overview','day1','day2','day3','day4','day5','day6','day7','day8','info','budget'];
-document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+document.addEventListener('touchstart', e => {
+  touchStartX = e.changedTouches[0].screenX;
+  touchStartY = e.changedTouches[0].screenY;
+}, { passive: true });
 document.addEventListener('touchend', e => {
-  const diff = e.changedTouches[0].screenX - touchStartX;
-  if (Math.abs(diff) < 80) return;
+  const diffX = e.changedTouches[0].screenX - touchStartX;
+  const diffY = e.changedTouches[0].screenY - touchStartY;
+  if (Math.abs(diffX) < 80 || Math.abs(diffY) > Math.abs(diffX)) return;
   const current = tabOrder.findIndex(id => document.getElementById('tab-' + id).classList.contains('active'));
-  if (diff < 0 && current < tabOrder.length - 1) showTab(tabOrder[current + 1]);
-  if (diff > 0 && current > 0) showTab(tabOrder[current - 1]);
+  if (diffX < 0 && current < tabOrder.length - 1) showTab(tabOrder[current + 1]);
+  if (diffX > 0 && current > 0) showTab(tabOrder[current - 1]);
 }, { passive: true });
 
 // 高德地圖：手機上優先用原生 scheme 直接喚起 APP，跳過網頁中轉
